@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="bd2.Muber.model">
+
+<class name="Calificacion" table="CALIFICACION">
+	<id name="idCalificacion" column="ID_CALIFICACION" type="java.lang.Integer">
+		<generator class="native"/>
+	</id>
+	<many-to-one name="pasajero" column="ID_USUARIO" not-null="true" cascade="all"/>
+	<property name="puntaje" type="integer">
+		<column name="PUNTAJE"/>
+	</property>
+	<property name="comentario" type="string">
+		<column name="COMENTARIO" length="50"/>
+	</property>
+</class>
+
+</hibernate-mapping>

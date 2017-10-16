@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="bd2.Muber.model">
+
+<class name="Usuario" abstract="true">
+	<id name="idUsuario" column="ID_USUARIO" type="java.lang.Integer">
+		<generator class="hilo"/>
+	</id>
+	<property name="nombre" type="string">
+		<column name="NOMBRE" length="30" />
+	</property>
+	<property name="dni" type="string">
+		<column name="DNI" length="10"/>
+	</property>
+	<property name="contrasena" type="string">
+		<column name="PASSWORD" length="30"/>
+	</property>	
+	<property name="fechaIngreso" type="string">
+		<column name="FECHA_INGRESO" length="11"/>
+	</property>		
+	
+	<union-subclass name="Conductor" table="USUARIO_CONDUCTOR">
+		<property name="licencia" type="string">
+			<column name="LICENCIA" length="20"/>
+		</property>
+		<property name="fechaLicencia" type="string">
+			<column name="FECHALICENCIA" length="20"/>
+		</property>	
+		<bag name="viajes" cascade="all">
+			<key column="ID_USUARIO" />
+			<one-to-many class="Viaje"/>
+		</bag>	
+	</union-subclass>
+	
+	<union-subclass name="Pasajero" table="USUARIO_PASAJERO">
+		<property name="dineroDisponible" type="double">
+			<column name="DINERO_DISPONIBLE"/>
+		</property>	
+	</union-subclass>
+	
+
+</class>
+</hibernate-mapping>
